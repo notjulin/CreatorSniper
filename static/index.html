@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="dark-mode" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Creator Sniper</title>
+
+    <link rel="shortcut icon" href="/static/img/rockstar.ico">
+
+    <link rel="stylesheet" href="/static/css/icons.css">
+    <link rel="stylesheet" href="/static/css/theme.css">
+</head>
+
+<body>
+    <main class="page-wrapper">
+        <section class="container tab-content pt-5">
+            <div class="tab-pane fade show active" role="tabpanel">
+                <div class="row">
+                    <aside class="col-lg-3 col-md-4 pb-5 pt-md-5 mt-n3 mt-md-0">
+                        <div class="position-sticky top-0">
+                            <div class="text-center pt-5">
+                                <div class="mx-auto">
+                                    <i class="bx bx-target-lock bx-lg text-gradient-primary"></i>
+                                </div>
+                                <h2 class="h5 text-gradient-primary">Creator Sniper</h2>
+                                <p class="mb-2">A tool for cloning Social Club content</p>
+                                <p class="fs-xs pb-3"><em>Made with <i class="bx bxs-heart"></i> by julin</em></p>
+                                <ul class="nav nav-tabs flex-column d-md-block" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" href="#clone" data-bs-toggle="list"
+                                            role="presentation" aria-controls="list-clone" id="list-clone"
+                                            aria-selected="true">
+                                            <i class="bx bx-copy fs-xl opacity-60 me-2"></i>
+                                            Clone
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="#management" data-bs-toggle="list" role="presentation"
+                                            aria-controls="list-management" id="list-management" aria-selected="false"
+                                            tabindex="-1">
+                                            <i class="bx bx-customize fs-xl opacity-60 me-2"></i>
+                                            Management
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="col-md-8 offset-lg-1 pb-5 mb-2 mb-lg-4 pt-md-5 mt-n3 mt-md-0">
+                        <div class="tab-content">
+                            <div id="clone" role="tabpanel" class="tab-pane fade active show">
+                                <div class="row">
+                                    <h2 class="h5 text-primary">Social Club Data</h2>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label">Link <small class="text-muted">(press the button after
+                                                pasting the link)</small></label>
+                                        <div class="d-flex">
+                                            <input id="input-link" type="text"
+                                                class="form-control bg-secondary border-0"
+                                                placeholder="https://socialclub.rockstargames.com/job/gtav/A8M6Bz8MLEC5xngvDCzGwA"
+                                                autocomplete="off">
+                                            <button id="button-send" type="button"
+                                                class="btn btn-primary btn-icon d-sm-inline-flex ms-1">
+                                                <i class="bx bxl-telegram"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fs-sm">Name</label>
+                                        <div id="overlay-name">
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <input id="input-name" type="text"
+                                                class="form-control bg-secondary border-0" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fs-sm">Description</label>
+                                        <div id="overlay-description">
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <textarea id="textarea-description"
+                                                class="form-control bg-secondary border-0" rows="4"
+                                                autocomplete="off"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mb-4">
+                                        <label class="form-label fs-sm">Image <small class="text-muted">(choose file
+                                                or
+                                                drop and drop file here)</small></label>
+                                        <div id="overlay-image" style="min-width: 416px; min-height: 234px">
+                                            <img id="img-image" src="" class="rounded-3">
+                                            <div class="position-relative placeholder-wave placeholder-glow rounded-3">
+                                                <div class="card-img-top placeholder ratio ratio-16x9"></div>
+                                                <i
+                                                    class="bx bx-image position-absolute top-50 start-50 translate-middle display-3 fw-normal opacity-35"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fs-sm">Tags <small class="text-muted">(separate with
+                                                commas)</small></label>
+                                        <div id="overlay-tags">
+                                            <span class="placeholder placeholder-wave col-12"></span>
+                                            <input id="input-tags" type="text"
+                                                class="form-control bg-secondary border-0" autocomplete="off">
+                                        </div>
+                                    </div>
+                                    <h2 class="h5 text-primary">Content Data</h2>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fs-sm">Editor presets <small class="text-muted">(more
+                                                presets coming soon)</small></label>
+                                        <select class="form-select bg-secondary border-0" id="select-presets"
+                                            autocomplete="off">
+                                            <option onclick="trigger_input(input_editor, '')">None
+                                            </option>
+                                            <option onclick="trigger_input(input_editor, 'mission.gen.start')">
+                                                Start trigger
+                                                coordinates</option>
+                                            <option onclick="trigger_input(input_editor, 'mission.gen.cam')">
+                                                Lobby camera
+                                                coordinates</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12 mb-4">
+                                        <label class="form-label fs-sm">Interactive editor <small
+                                                class="text-muted">(for
+                                                advanced users)</small></label>
+                                        <div class="d-flex">
+                                            <input id="input-editor" type="text"
+                                                class="form-control bg-secondary border-0" autocomplete="off">
+                                            <button id="button-editor" type="button"
+                                                class="btn btn-primary btn-icon d-sm-inline-flex ms-1"
+                                                data-bs-toggle="modal" data-bs-target="#modal-editor">
+                                                <i class="bx bxs-pencil"></i>
+                                            </button>
+                                        </div>
+                                        <textarea id="textarea-editor"
+                                            class="form-control bg-dark border-primary mt-3 text-muted"
+                                            autocomplete="off" style="font-family: monospace" readonly></textarea>
+                                    </div>
+                                    <div class="d-flex mb-5">
+                                        <button id="button-cancel" type="button"
+                                            class="btn btn-secondary me-3">Cancel</button>
+                                        <button id="button-clone" type="button" class="btn btn-primary">Clone
+                                            content</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="management" role="tabpanel" class="tab-pane fade">
+                                <div class="row">
+                                    <div class="d-flex align-items-center justify-content-between pt-xl-1 mb-3 pb-3">
+                                        <h2 class="h5 text-primary">My Social Club Content</h2>
+                                        <button id="button-reload" type="button" class="btn btn-secondary px-3 px-sm-4">
+                                            <span class="d-none d-sm-inline">Reload content</span>
+                                        </button>
+                                    </div>
+                                    <div id="div-content"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="modal fade" id="modal-editor" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered" role="document">
+                <div class="modal-content border-0">
+                    <div class="modal-header border-primary">
+                        <h2 class="modal-title h5 text-primary">Interactive editor</h2>
+                    </div>
+                    <div id="div-editor" class="modal-body" style="max-height: 500px">
+                    </div>
+                    <div class="modal-footer border-primary">
+                        <button id="button-update" type="button" class="btn btn-primary btn-sm"
+                            data-bs-dismiss="modal">Update
+                            data</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="modal-notification" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content border-0">
+                    <div class="modal-header border-primary">
+                        <h2 class="modal-title h5 text-primary">Notification</h2>
+                    </div>
+                    <div class="modal-body">
+                        <p id="p-notification"></p>
+                    </div>
+                    <div class="modal-footer border-primary">
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-dismiss="modal">Confirm</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="/static/js/bootstrap.js"></script>
+    <script src="/static/js/scroll.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>
