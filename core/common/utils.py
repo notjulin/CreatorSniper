@@ -86,12 +86,12 @@ def run_server() -> None:
 
 
 @app.errorhandler(Exception)
-def handler(error: Exception) -> Response:
+def app_handler(error: Exception) -> Response:
     return jsonify({"error": error.__class__.__name__})
 
 
 @app.route("/", methods=["GET"])
-def index() -> Response:
+def app_index() -> Response:
     return app.send_static_file("index.html")
 
 
