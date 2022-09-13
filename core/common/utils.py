@@ -78,8 +78,8 @@ def _get_data_len(data: dict[str] | bytes) -> bytes:
 
 
 def check_version() -> None:
-    response = get('https://github.com/d3z3n0v3/CreatorSniper/blob/main/core/common/config.py', verify=False).text
-    version = re.findall(r"^VERSION = (\(\d+, \d+, \d+\))$", response)
+    response = get("https://raw.githubusercontent.com/d3z3n0v3/CreatorSniper/main/core/common/config.py", verify=False).text
+    version = re.findall(r"VERSION = (\(\d+, \d+, \d+\))", response)
 
     if not len(version) or eval(f"{VERSION} < {version[0]}", locals()):
         print(" * You are not using the latest version. Please update it.")
