@@ -2,7 +2,7 @@
 
 Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 
-![](https://i.imgur.com/eIQ33ec.png)
+<img src="https://i.imgur.com/eIQ33ec.png">
 
 ## Requirements
 
