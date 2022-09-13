@@ -47,12 +47,14 @@ from urllib3 import disable_warnings
 from urllib3.exceptions import InsecureRequestWarning
 
 from core.classes.exceptions import InvalidProcess
-from core.common.utils import run_server
+from core.common.utils import check_version, run_server
 
 
 def main() -> None:
     logging.disable()
     disable_warnings(InsecureRequestWarning)
+
+    check_version()
 
     try:
         run_server()

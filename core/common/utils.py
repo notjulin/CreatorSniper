@@ -77,6 +77,15 @@ def _get_data_len(data: dict[str] | bytes) -> bytes:
     return data_len
 
 
+def check_version() -> None:
+    response = get('https://github.com/d3z3n0v3/CreatorSniper/blob/main/core/common/config.py', verify=False).text
+    version = re.findall(r"^VERSION = (\(\d+, \d+, \d+\))$", response)
+
+    if not len(version) or eval(f"{VERSION} < {version[0]}", locals()):
+        print(" * You are not using the latest version. Please update it.")
+        exit(" * https://github.com/d3z3n0v3/CreatorSniper")
+
+
 def run_server() -> None:
     cli.show_server_banner = _show_server_banner
 
@@ -146,7 +155,7 @@ def app_list() -> Response:
                 if not len(name):
                     name = "(empty)"
 
-                image = ros.get(f"http://prod.ros.rockstargames.com/cloud/11/cloudservices/ugc/gta5mission/{content}/2_0.jpg")
+                image = ros.get(f"http://prod.ros.rockstargames.com/cloud/11/cloudservices/ugc/gta5mission/{content}/2_0.jpg", verify=False)
                 contents.append({"id": content, "image": base64.b64encode(image).decode(), "name": name})
 
             (count, total) = re.findall(r"<Result Count=\"(\d+)\" Total=\"(\d+)\"", response)[0]
