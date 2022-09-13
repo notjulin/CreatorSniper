@@ -18534,7 +18534,7 @@ img-comparison-slider:focus {
 .dark-mode .form-control,
 .dark-mode .form-select {
     border-color: rgba(255, 255, 255, .18);
-    background-color: rgba(255, 255, 255, .02);
+    background-color: rgba(21, 25, 34, .02);
     color: rgba(255, 255, 255, .7)
 }
 
@@ -18542,6 +18542,11 @@ img-comparison-slider:focus {
 .dark-mode .form-select:focus {
     border-color: rgba(255, 255, 255, .35);
     box-shadow: none
+}
+
+.dark-mode .form-select option {
+    background-color: rgba(21, 25, 34);
+    color: rgba(255, 255, 255)
 }
 
 .dark-mode .form-control:disabled,

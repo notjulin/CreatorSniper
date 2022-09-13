@@ -159,7 +159,7 @@ def app_list() -> Response:
             break
 
     if len(contents):
-        print("* [LIST] %d contents" % len(contents))
+        print(" * [LIST] %d contents" % len(contents))
 
         return jsonify({"contents": contents})
     return Response(status=404)
