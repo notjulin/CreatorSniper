@@ -1,8 +1,8 @@
 # CreatorSniper
 
-Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
-
 ![](https://i.imgur.com/eIQ33ec.png)
+
+Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 
 ## Requirements
 
@@ -21,6 +21,13 @@ Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 **4.** Run **run.bat** and wait for dependencies to be installed.
 
 **5.** Visit [http://localhost:5000/](http://localhost:5000/).
+
+## Features
+
+- Copy any GTA V job (**supports all platforms**).
+- List and manage your jobs with no need to be in Creator Mode.
+- Edit job data (**still in development**).
+- Upload **custom** Images/GIFs.
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
