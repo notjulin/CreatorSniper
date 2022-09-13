@@ -61,6 +61,8 @@ const p_notification = id_for('p-notification')
 const list_clone = id_for('list-clone')
 const list_management = id_for('list-management')
 
+const modal = new bootstrap.Modal(modal_notification)
+
 /*
  * Helper functions
 */
@@ -90,8 +92,7 @@ const set_path = (object, path, value) => path
 
 const show_notification = (text_value) => {
     p_notification.innerHTML = text_value
-
-    new bootstrap.Modal(modal_notification).show()
+    modal.show()
 }
 
 const load_image = (file, element) => {
@@ -562,7 +563,17 @@ list_management.onclick = () => {
 
         div_content.innerHTML = ''
 
-        const contents = (await response.json()).contents
+        const content = await response.json()
+
+        if (content.error) {
+            toggle_spin(button_reload)
+            enable(button_reload)
+
+            show_notification(`Error: Exception ${content.error}`)
+            return
+        }
+
+        const contents = content.contents
 
         contents.forEach((content) => {
             div_content.innerHTML += `

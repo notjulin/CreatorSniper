@@ -94,9 +94,9 @@ def run_server() -> None:
     app.run(FLASK_HOST, FLASK_PORT, FLASK_DEBUG)
 
 
-@app.errorhandler(Exception)
-def app_handler(error: Exception) -> Response:
-    return jsonify({"error": error.__class__.__name__})
+# @app.errorhandler(Exception)
+# def app_handler(error: Exception) -> Response:
+#     return jsonify({"error": error.__class__.__name__})
 
 
 @app.route("/", methods=["GET"])
@@ -155,7 +155,7 @@ def app_list() -> Response:
                 if not len(name):
                     name = "(empty)"
 
-                image = ros.get(f"http://prod.ros.rockstargames.com/cloud/11/cloudservices/ugc/gta5mission/{content}/2_0.jpg", verify=False)
+                image = ros.get(f"http://prod.ros.rockstargames.com/cloud/11/cloudservices/ugc/gta5mission/{content}/2_0.jpg")
                 contents.append({"id": content, "image": base64.b64encode(image).decode(), "name": name})
 
             (count, total) = re.findall(r"<Result Count=\"(\d+)\" Total=\"(\d+)\"", response)[0]
