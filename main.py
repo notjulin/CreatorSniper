@@ -57,7 +57,7 @@ def main() -> None:
     try:
         run_server()
     except InvalidProcess:
-        exit(' * You must have GTA opened before running this script')
+        exit(' * You must have GTA open before running this script')
 
 
 if __name__ == "__main__":
