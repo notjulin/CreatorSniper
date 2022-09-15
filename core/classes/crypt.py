@@ -3,10 +3,10 @@ import hashlib
 import hmac
 import os
 
-from core.common.config import *
+from core.common.config import ROS_KEY, ROS_VERSION
 
 
-def _encrypt(key: bytes | bytearray, data: bytes | bytearray) -> bytes:
+def _rc4(key: bytes | bytearray, data: bytes | bytearray) -> bytes:
     l = len(key)
     s = list(range(256))
     j = 0
@@ -34,15 +34,12 @@ class RosCrypt:
     sess_ticket: str
     acct_ticket: str
 
-    xor: bytes
-    hash: bytes
-
     def __init__(self) -> None:
         dec = base64.b64decode(ROS_KEY)
         key = dec[1:33]
 
-        self.xor = _encrypt(key, dec[33:49])
-        self.hash = _encrypt(key, dec[49:65])
+        self.xor = _rc4(key, dec[33:49])
+        self.hash = _rc4(key, dec[49:65])
 
     def encrypt(self, data: bytes) -> bytes:
         r = bytearray(os.urandom(16))
@@ -53,7 +50,7 @@ class RosCrypt:
             o.append(r[i] ^ self.xor[i])
             r[i] ^= k[i]
 
-        o += _encrypt(r, data)
+        o += _rc4(r, data)
         h = bytearray(o)
         h += self.hash
         h = hmac.HMAC(r, bytes(h), hashlib.sha1).digest()
@@ -71,7 +68,7 @@ class RosCrypt:
             r[i] ^= k[i]
 
         a = data[16:20]
-        b = _encrypt(r, a)
+        b = _rc4(r, a)
         b = (b[0] << 24) + (b[1] << 16) + (b[2] << 8) + b[1] + 20
         o += a
         t = 20
@@ -82,7 +79,7 @@ class RosCrypt:
             o += data[t:e]
             t += b
 
-        return _encrypt(r, o)
+        return _rc4(r, o)
 
     def http_headers(self, method: str, path: str) -> dict[str, str]:
         r = bytearray(16)
@@ -92,20 +89,20 @@ class RosCrypt:
         for i in range(16):
             r[i] = k[i] ^ self.xor[i]
 
-        h = b""
+        h = b''
         h += method.encode()
-        h += b"\x00"
+        h += b'\x00'
         h += path.encode()
-        h += b"\x00"
-        h += b"239"
-        h += b"\x00"
+        h += b'\x00'
+        h += b'239'
+        h += b'\x00'
         h += self.sess_ticket.encode()
-        h += b"\x00"
+        h += b'\x00'
         h += c
-        h += b"\x00"
+        h += b'\x00'
         h += self.hash
 
-        u = f"e=1,t=gta5,p=pcros,v={ROS_VERSION}"
+        u = f'e=1,t=gta5,p=pcros,v={ROS_VERSION}'
         b = bytearray(len(u) + 4)
 
         for i in range(4):
@@ -117,16 +114,15 @@ class RosCrypt:
         u = base64.b64encode(b).decode()
         d = {}
 
-        if method == "GET":
-            d["scs-ticket"] = self.acct_ticket
+        if method == 'GET':
+            d['scs-ticket'] = self.acct_ticket
+        elif method == 'POST':
+            d['content-type'] = 'application/x-www-form-urlencoded; charset=utf-8'
 
-        if method == "POST":
-            d["content-type"] = "application/x-www-form-urlencoded; charset=utf-8"
-
-        d["user-agent"] = f"ros {u}"
-        d["ros-securityflags"] = "239"
-        d["ros-sessionticket"] = self.sess_ticket
-        d["ros-challenge"] = c.decode()
-        d["ros-headershmac"] = base64.b64encode(hmac.HMAC(r, bytes(h), hashlib.sha1).digest()).decode()
+        d['user-agent'] = f'ros {u}'
+        d['ros-securityflags'] = '239'
+        d['ros-sessionticket'] = self.sess_ticket
+        d['ros-challenge'] = c.decode()
+        d['ros-headershmac'] = base64.b64encode(hmac.HMAC(r, bytes(h), hashlib.sha1).digest()).decode()
 
         return d

@@ -1,9 +1,8 @@
-from core.classes.exceptions import InvalidProcess
+from core.classes.exceptions import InvalidProcessError
 from psutil import AccessDenied, NoSuchProcess, ZombieProcess, process_iter
 from pymem import Pymem
 from pymem.pattern import pattern_scan_module
 from pymem.process import base_module, module_from_name
-from pymem.ressources.structure import MODULEINFO
 
 
 def _open_process(process_name: str) -> Pymem:
@@ -15,22 +14,14 @@ def _open_process(process_name: str) -> Pymem:
                 return Pymem(proc_name)
         except (NoSuchProcess, AccessDenied, ZombieProcess):
             pass
-    raise InvalidProcess
+    raise InvalidProcessError
 
 
 def _convert_pattern(pattern: str) -> bytes:
-    return b"".join([b"\\x%b" % byte.encode() if byte != "?" else b"." for byte in pattern.split()])
+    return b''.join([b'\\x%b' % byte.encode() if byte != '?' else b'.' for byte in pattern.split()])
 
 
 class Memory:
-    proc: Pymem
-    modu: MODULEINFO
-
-    addr: int
-    prev_addr: int
-    prev_offs: int
-    save_addr: int
-
     def __init__(self, process_name: str, module_name: str | None = None) -> None:
         self.proc = _open_process(process_name)
         self.modu = base_module(self.proc.process_handle) if module_name is None else module_from_name(self.proc.process_handle, module_name)
@@ -65,6 +56,6 @@ class Memory:
 
     def read(self, type: str, *args) -> bool | int | float | str | bytes | None:
         try:
-            return getattr(self.proc, f"read_{type}")(self.addr, *args)
+            return getattr(self.proc, f'read_{type}')(self.addr, *args)
         except AttributeError:
             pass

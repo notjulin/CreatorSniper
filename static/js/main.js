@@ -83,7 +83,7 @@ const trigger_input = (element, text) => {
 
 const resolve_path = (object, path) => path
     .split(/[\.\[\]\'\"]/)
-    .filter(p => p)
+    .filter((p) => p)
     .reduce((o, p) => o[p], object)
 
 const set_path = (object, path, value) => path

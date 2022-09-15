@@ -1,26 +1,22 @@
-class InvalidContent(Exception):
+class InvalidContentError(Exception):
     pass
 
 
-class InvalidProcess(Exception):
+class InvalidProcessError(Exception):
     pass
 
 
-class InvalidRequest(Exception):
+class InvalidRequestError(Exception):
     pass
 
 
-class InvalidMethod(Exception):
+class InvalidMethodError(Exception):
     pass
 
 
-class InvalidImage(Exception):
+class InvalidImageError(Exception):
     pass
 
 
-class InvalidData(Exception):
-    pass
-
-
-class NotImplemented(Exception):
+class InvalidDataError(Exception):
     pass
