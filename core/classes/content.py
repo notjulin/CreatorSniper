@@ -37,13 +37,14 @@ class Content:
             raise InvalidContentError
 
         langs = ['en', 'fr', 'de', 'it', 'es', 'pt', 'pl', 'ru', 'es-mx']
-        prefix = '0_1' if self.type == 'VersusMission' else '0_0'
+        prefixes = ['0_0', '0_1']
 
-        for lang in langs:
-            response = get(f'''http://prod.cloud.rockstargames.com/ugc/gta5mission/{self.image.split('/')[5]}/{self.id}/{prefix}_{lang}.json''', verify=False)
+        for prefix in prefixes:
+            for lang in langs:
+                response = get(f'''http://prod.cloud.rockstargames.com/ugc/gta5mission/{self.image.split('/')[5]}/{self.id}/{prefix}_{lang}.json''', verify=False)
 
-            if response.status_code == 200:
-                self.data = response.json()
-                self.lang = lang
-                return
+                if response.status_code == 200:
+                    self.data = response.json()
+                    self.lang = lang
+                    return
         raise InvalidContentError

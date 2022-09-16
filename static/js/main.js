@@ -54,6 +54,7 @@ const div_content = id_for('div-content')
 
 const select_presets = id_for('select-presets')
 
+const modal_editor = id_for('modal-editor')
 const modal_notification = id_for('modal-notification')
 
 const p_notification = id_for('p-notification')
@@ -439,6 +440,8 @@ button_editor.onclick = () => {
             <input class="form-control" type="hidden" value="${value}">
         </div>`
     }
+
+    new bootstrap.Modal(modal_editor).show()
 }
 
 button_update.onclick = () => {

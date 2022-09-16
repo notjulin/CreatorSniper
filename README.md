@@ -29,6 +29,10 @@ Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 - Edit job data (**still in development**).
 - Upload **custom** Images/GIFs.
 
+## Known Issues
+
+- Currently, you can't clone a Versus Mission or an Adversary Mode job (will be fixed soon).
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 
