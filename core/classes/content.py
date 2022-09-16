@@ -28,6 +28,7 @@ class Content:
 
         self.name = content['name'] if 'name' in content else ''
         self.desc = content['desc'] if 'desc' in content else ''
+        self.type = content['type'] if 'type' in content else ''
         self.tags = content['userTags'] if 'userTags' in content else []
         self.image = content['imgSrc'] if 'imgSrc' in content else ''
 
@@ -36,9 +37,10 @@ class Content:
             raise InvalidContentError
 
         langs = ['en', 'fr', 'de', 'it', 'es', 'pt', 'pl', 'ru', 'es-mx']
+        prefix = '0_1' if self.type == 'VersusMission' else '0_0'
 
         for lang in langs:
-            response = get(f'''http://prod.cloud.rockstargames.com/ugc/gta5mission/{self.image.split('/')[5]}/{self.id}/0_0_{lang}.json''', verify=False)
+            response = get(f'''http://prod.cloud.rockstargames.com/ugc/gta5mission/{self.image.split('/')[5]}/{self.id}/{prefix}_{lang}.json''', verify=False)
 
             if response.status_code == 200:
                 self.data = response.json()
