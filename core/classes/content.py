@@ -37,7 +37,11 @@ class Content:
             raise InvalidContentError
 
         langs = ['en', 'fr', 'de', 'it', 'es', 'pt', 'pl', 'ru', 'es-mx']
-        prefixes = ['0_0', '0_1']
+        prefixes = []
+
+        for i in range(3):
+            for j in range(3):
+                prefixes.append(f'{i}_{j}')
 
         for prefix in prefixes:
             for lang in langs:

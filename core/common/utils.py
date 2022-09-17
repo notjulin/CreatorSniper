@@ -94,9 +94,9 @@ def run_server() -> None:
     app.run(FLASK_HOST, FLASK_PORT, FLASK_DEBUG)
 
 
-# @app.errorhandler(Exception)
-# def app_handler(error: Exception) -> Response:
-#     return jsonify({'error': error.__class__.__name__})
+@app.errorhandler(Exception)
+def app_handler(error: Exception) -> Response:
+    return jsonify({'error': error.__class__.__name__})
 
 
 @app.route('/', methods=['GET'])
@@ -186,10 +186,15 @@ def app_clone() -> Response:
             data_len = _get_data_len(data)
             image_len = _get_data_len(image)
 
+            # temporary fix for Mission/AdversaryMode jobs
+            if _data := data:
+                if _data['mission']['gen']['type'] == 0:
+                    _data['mission']['gen']['type'] = 4
+
             datajson = json.dumps(
                 {
-                    'meta': data['meta'],
-                    'mission': data['mission'],
+                    'meta': _data['meta'],
+                    'mission': _data['mission'],
                     'version': 2,
                 }
             ).replace('"', '\\"')

@@ -16,7 +16,7 @@ Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 
 **2.** Download and extract [CreatorSniper's](https://github.com/d3z3n0v3/CreatorSniper/archive/refs/heads/main.zip) folder into a directory of your preference.
 
-**3.** Be sure to have GTA V open.
+**3.** Be sure to have GTA V open (must be loaded into Single Player or Online).
 
 **4.** Run **run.bat** and wait for dependencies to be installed.
 
@@ -31,7 +31,9 @@ Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 
 ## Known Issues
 
-- Currently, you can't clone a Versus Mission or an Adversary Mode job (will be fixed soon).
+Strikethrough lines are fixed issues. 
+
+- ~~Currently, you can't clone Mission or Adversary Mode jobs (will be fixed soon).~~
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
