@@ -33,7 +33,8 @@ Open-Source job cloner/editor for GTA V. Strictly for educational purposes.
 
 Strikethrough lines are fixed issues. 
 
-- ~~Currently, you can't clone Mission or Adversary Mode jobs (will be fixed soon).~~
+- ~~Currently, you can't clone Mission or Adversary Mode jobs.~~
+- Some jobs are not being copied properly (broken).
 
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
