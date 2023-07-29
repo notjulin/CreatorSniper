@@ -18,7 +18,7 @@ EXPR_SESS_KEY = '''
 memory.reset()
 memory.add(3)
 memory.rip()
-memory.add(1528)
+memory.add(1544)
 '''
 
 EXPR_SESS_TICKET = '''
