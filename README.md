@@ -1,3 +1,6 @@
+# DEPRECATED
+This repository is now deprecated and the support is over.
+
 # CreatorSniper
 
 ![](https://i.imgur.com/eIQ33ec.png)
